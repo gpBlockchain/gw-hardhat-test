@@ -9,7 +9,7 @@ contract typeU8{
     event U8eventIndex(uint8 indexed,uint8[] indexed ,uint8[3] indexed);
 
     function typeUint8(uint8 p1, uint8[] memory p2, uint8[3] memory p3) public returns (uint8, uint8[] memory ,  uint8[3] memory){
-        emit U8event(u8,u8s,uint8s3);
+        emit U8event(u8, u8s,uint8s3);
         emit U8eventIndex(u8,u8s,uint8s3);
         u8 = p1;
         u8s = p2;
@@ -30,7 +30,7 @@ contract typeU8{
 
 }
 
-contract typeInt8{
+contract typeI8{
 
     int8 public i8;
     int8[] public i8s;
@@ -38,7 +38,7 @@ contract typeInt8{
     event Int8event(int8,int8[],int8[3]);
     event Int8eventIndex(int8 indexed,int8[] indexed ,int8[3] indexed);
 
-    function typeUint8(int8 p1, int8[] memory p2, int8[3] memory p3) public returns (int8, int8[] memory ,  int8[3] memory){
+    function typeInt8(int8 p1, int8[] memory p2, int8[3] memory p3) public returns (int8, int8[] memory ,  int8[3] memory){
         emit Int8event(i8,i8s,i8s3);
         emit Int8eventIndex(i8,i8s,i8s3);
         i8 = p1;
@@ -53,8 +53,7 @@ contract typeInt8{
     }
 
     function getUint8() public  view returns (int8, int8[] memory ,  int8[3] memory){
-//        emit U8event(u8,u8s,uint8s3);
-//        emit U8eventIndex(u8,u8s,uint8s3);
+
         return (i8,i8s,i8s3);
     }
 
