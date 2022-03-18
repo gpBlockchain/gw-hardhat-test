@@ -29,3 +29,33 @@ contract typeU8{
     }
 
 }
+
+contract typeInt8{
+
+    int8 public i8;
+    int8[] public i8s;
+    int8[3] public i8s3;
+    event Int8event(int8,int8[],int8[3]);
+    event Int8eventIndex(int8 indexed,int8[] indexed ,int8[3] indexed);
+
+    function typeUint8(int8 p1, int8[] memory p2, int8[3] memory p3) public returns (int8, int8[] memory ,  int8[3] memory){
+        emit Int8event(i8,i8s,i8s3);
+        emit Int8eventIndex(i8,i8s,i8s3);
+        i8 = p1;
+        i8s = p2;
+        i8s3 = p3;
+        return getUint8WithEvent();
+    }
+    function getUint8WithEvent() public  returns (int8, int8[] memory ,  int8[3] memory){
+        emit Int8event(i8,i8s,i8s3);
+        emit Int8eventIndex(i8,i8s,i8s3);
+        return (i8,i8s,i8s3);
+    }
+
+    function getUint8() public  view returns (int8, int8[] memory ,  int8[3] memory){
+//        emit U8event(u8,u8s,uint8s3);
+//        emit U8eventIndex(u8,u8s,uint8s3);
+        return (i8,i8s,i8s3);
+    }
+
+}

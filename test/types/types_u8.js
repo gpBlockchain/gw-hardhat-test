@@ -42,3 +42,27 @@ describe("typeU8 ", function () {
 
 
 });
+
+describe("typeInt8 ", function () {
+
+    let contract;
+
+    beforeEach(async function () {
+        const blockInfoContract = await ethers.getContractFactory("typeInt8");
+        contract = await blockInfoContract.deploy();
+        console.log("deployTransaction:",contract.deployTransaction.hash);
+        console.log("address:",contract.address);
+        await contract.deployed();
+    });
+
+    it("typeInt8 max ", async () => {
+        let tx = await contract.typeUint8(255,[255,255,255],[255,255,255]);
+        console.log("typeUint8 hash :",tx.hash);
+        await tx.wait();
+        let reusltGetUint8 = await contract.getUint8();
+        expect(reusltGetUint8.toString()).to.be.equal('255,255,255,255,255,255,255')
+
+    })
+
+
+});
