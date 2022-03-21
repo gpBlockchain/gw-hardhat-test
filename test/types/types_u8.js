@@ -1,7 +1,6 @@
 const { expect } = require("chai");
 const { ethers, web3 } = require("hardhat");
 
-
 describe("typeU8 ", function () {
 
     let contract;
@@ -66,10 +65,10 @@ describe("typeI8 ", function () {
         });
 
         it("typeI8 max ", async () => {
-            let tx = await contract.typeUint8(255,[255,255,255],[255,255,255]);
+            let tx = await contract.typeInt8(255,[255,255,255],[255,255,255]);
             console.log("typeI8 hash :",tx.hash);
             await tx.wait();
-            let reusltGetUint8 = await contract.getUint8();
+            let reusltGetUint8 = await contract.getInt8();
             expect(reusltGetUint8.toString()).to.be.equal('255,255,255,255,255,255,255')
 
         })
