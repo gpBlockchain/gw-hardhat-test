@@ -39,6 +39,25 @@ describe("typeU8 ", function () {
 
     })
 
+
+    it("typeU8 beyond 255 ", async () => {
+
+        try {
+        let tx = await contract.typeUint8(256,[256,256,256],[256,256,256]);
+        console.log("typeUint8 hash :",tx.hash);
+        await tx.wait();
+        let reusltGetUint8 = await contract.getUint8();
+        expect(reusltGetUint8.toString()).to.throw(Error)
+            
+        } catch (error) {
+            
+        }
+
+
+    })
+
+
+
     it("typeU8 min ", async () => {
 
         let tx = await contract.typeUint8(0,[0,0,0],[0,0,0]);
@@ -64,12 +83,26 @@ describe("typeI8 ", function () {
             await contract.deployed();
         });
 
-        it("typeI8 max ", async () => {
-            let tx = await contract.typeInt8(255,[255,255,255],[255,255,255]);
+        it("typeI8 max 127 ", async () => {
+            let tx = await contract.typeInt8(127,[127,127,127],[127,127,127]);
             console.log("typeI8 hash :",tx.hash);
             await tx.wait();
-            let reusltGetUint8 = await contract.getInt8();
-            expect(reusltGetUint8.toString()).to.be.equal('255,255,255,255,255,255,255')
+            let reusltGetInt8 = await contract.getInt8();
+            expect(reusltGetInt8.toString()).to.be.equal('127,127,127,127,127,127,127')
+
+        })
+
+        it("typeI8 max beyond 127 ", async () => {
+            try {
+                let tx = await contract.typeInt8(128,[128,128,128],[128,128,128]);
+                console.log("typeI8 hash :",tx.hash);
+                await tx.wait();
+                let reusltGetInt8 = await contract.getInt8();
+                expect(reusltGetInt8.toString()).to.throw(Error)
+            } catch (error) {
+             
+            }
+ 
 
         })
     });
