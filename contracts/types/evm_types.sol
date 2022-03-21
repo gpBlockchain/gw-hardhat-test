@@ -44,7 +44,6 @@ contract typeI8{
 
     function typeInt8(int8 p1, int8[] memory p2, int8[3] memory p3) public returns (int8, int8[] memory, int8[3] memory)
     {
-
         emit Int8event(i8, i8s, i8s3);
         emit Int8eventIndex(i8, i8s, i8s3);
         i8 = p1;
@@ -62,7 +61,6 @@ contract typeI8{
 
     function getInt8() public  view returns (int8, int8[] memory, int8[3] memory)
     {
-
         return (i8, i8s, i8s3);
     }
 

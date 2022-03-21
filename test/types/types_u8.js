@@ -39,7 +39,6 @@ describe("typeU8 ", function () {
 
     })
 
-
     it("typeU8 beyond 255 ", async () => {
 
         try {
@@ -47,28 +46,19 @@ describe("typeU8 ", function () {
         console.log("typeUint8 hash :",tx.hash);
         await tx.wait();
         let reusltGetUint8 = await contract.getUint8();
-        expect(reusltGetUint8.toString()).to.throw(Error)
-            
+        expect(reusltGetUint8.toString()).to.throw(Error)     
         } catch (error) {
             
         }
-
-
     })
 
-
-
     it("typeU8 min ", async () => {
-
         let tx = await contract.typeUint8(0,[0,0,0],[0,0,0]);
         console.log("typeUint8 hash :",tx.hash);
         await tx.wait();
         let reusltGetUint8 = await contract.getUint8();
         expect(reusltGetUint8.toString()).to.be.equal('0,0,0,0,0,0,0')
-
     })
-
-
 });
    
 describe("typeI8 ", function () {
@@ -102,7 +92,5 @@ describe("typeI8 ", function () {
             } catch (error) {
              
             }
- 
-
         })
     });
