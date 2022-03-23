@@ -1,5 +1,6 @@
 //SPDX-License-Identifier:SimpL-2.0
 pragma solidity ^0.7.3;
+import "hardhat/console.sol";
 
 
 contract typeU8{
@@ -64,4 +65,104 @@ contract typeI8{
         return (i8, i8s, i8s3);
     }
 
+}
+
+contract typeBool{
+
+    bool a = true;
+    bool b = !a;
+
+    function getBool() public  view returns (bool f)
+    {
+        return a;
+    }
+}
+
+contract typeAddress{
+
+   address public address1 = 0x2710D026F5e3d115A8bfD1e705E4BF8D96750242;
+
+   function getBalanceBb() public view returns (uint256)
+    {
+        console.log(address1.balance);
+        return address1.balance;
+    }
+
+    function getContractBalance() public view returns(uint256)
+    {
+        return address(this).balance;
+    }
+
+}
+
+contract  typeBytes{
+
+    bytes1 bt1 = "a";
+    bytes32 bt2 = "cccccccccccccccccccccccccccccccc";
+    bytes  unFixedBytes = new bytes(2);
+
+    function getbBytes() public view returns(bytes1){
+        return bt1;
+    }
+
+    function getbBytes1Length() public view returns(uint){
+        return bt1.length;
+    }
+
+    function getbBytes2Length() public view returns(uint){
+        return bt2.length;
+    }
+
+    function testBytesMaxLength(string memory f) public pure returns(uint8){
+
+        bytes32 result;
+        assembly{
+            result := mload(add(f,32))
+        }
+        return result.length;
+
+    }
+
+    // 设置字节数组的长度
+//    function setUnFixedBytesLength(uint len) public view  {
+//        unFixedBytes.length = len;
+//    }
+
+    function unFixedBytesLength() public view returns (uint) {
+
+        return unFixedBytes.length;
+
+    }
+
+    function pushUnFixedAByte(byte b)  public  {
+
+        unFixedBytes.push(b);
+
+    }
+
+}
+
+contract typeString{
+
+    string  public name= "crptotest";
+
+    function getName() view public returns( string memory){
+        return name;
+    }
+
+    function setName(string memory _name ) public {
+        name=_name;
+    }
+
+    function getLength() public view returns(uint){
+        return bytes(name).length;
+    }
+
+    function changName() public {
+        bytes(name)[0]='Z';
+    }
+
+    function getBytes() public view returns(bytes memory){
+        return bytes(name);
+    }
 }

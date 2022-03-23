@@ -13,6 +13,10 @@ const PRIVATE_KEY2 = "6cd5e7be2f6504aa5ae7c0c04178d8f47b7cfc63b71d95d9e6282f5b09
  * */
 module.exports = {
   networks: {
+    hardhat:{
+      loggingEnabled:true,
+      allowUnlimitedContractSize:true,
+    },
     gw_devnet_v1: {
       url: `http://127.0.0.1:8024`,
       accounts: [`0xdd50cac37ec6dd12539a968c1a2cbedda75bd8724f7bcad486548eaabb87fc8b`, `0x6cd5e7be2f6504aa5ae7c0c04178d8f47b7cfc63b71d95d9e6282f5b090431bf`],
