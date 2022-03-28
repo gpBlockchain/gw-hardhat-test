@@ -69,13 +69,26 @@ contract typeI8{
 
 contract typeBool{
 
-    bool a = true;
-    bool b = !a;
+    bool public a = true;
+    bool public b = false;
+    bool public c = !a;
+    bool public d = !b;
 
-    function getBool() public  view returns (bool f)
+    function getBoolA() public  view  returns (bool )
     {
         return a;
     }
+
+    function getBoolB() public  view  returns (bool)
+    {
+        return a;
+    }
+
+    function andBool() public view  returns(bool)
+    {
+      return  a || b;
+    }
+
 }
 
 contract typeAddress{

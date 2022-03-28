@@ -40,8 +40,7 @@ describe("typeU8 ", function () {
 
         let tx = await contract.typeUint8(255,[255,255,255],[255,255,255]);
         console.log("typeUint8 hash :",tx.hash);
-        await tx.wait();
-        let reusltGetUint8 = await contract.getUint8();
+        let reusltGetUint8 = contract.getUint8();
         expect(reusltGetUint8.toString()).to.be.equal('255,255,255,255,255,255,255')
 
     })
@@ -123,10 +122,16 @@ describe("typeBool", function (){
 
     });
 
-    it("typeBool", async () => {
+    it("typeBool1", async () => {
 
-            let f =  contract.getBool();
-            //expect(f).to.be.true;
+        let a = await contract.getBoolA()
+        expect(a).to.be.true;
+    })
+
+    it("typeBool2", async () => {
+
+        let b = await contract.getBoolB();
+        expect(b).to.be.true;
     })
 
 });
