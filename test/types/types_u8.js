@@ -134,6 +134,25 @@ describe("typeBool", function (){
         expect(b).to.be.true;
     })
 
+    it("typeBool3", async () => {
+
+        let c = await contract.getOrBool();
+        expect(c).to.be.true;
+    })
+
+    it("typeBool4", async () => {
+
+        let c = await contract.getAndBool();
+        expect(c).to.be.false;
+    })
+
+    it("typeBool5", async () => {
+
+        let c = await contract.getBoolC();
+        expect(c).to.be.false;
+
+    })
+
 });
 
 describe("typeAddress", function (){
@@ -259,4 +278,57 @@ describe("typeString", function (){
     })
 
 });
+
+
+describe("typeEmum", function (){
+
+    let contract;
+
+    before(async function () {
+
+        const blockInfoContract = await ethers.getContractFactory("typeEmum");
+        contract = await blockInfoContract.deploy();
+        console.log("deployTransaction:",contract.deployTransaction.hash);
+        console.log("adress:",contract.address);
+        await contract.deployed();
+
+    });
+
+    it("typeEmum:", async () => {
+
+        contract.setGoStraight();
+        let printSeason = await contract.getChoice();
+        console.log(printSeason);
+        //expect(stringLength).to.equal(9)
+        let printSeason2 = await contract.getDefaultChoice();
+        console.log(printSeason2);
+
+    })
+
+});
+
+
+describe("typeFixedArray", function (){
+
+    let contract;
+
+    before(async function () {
+
+        const blockInfoContract = await ethers.getContractFactory("typeFixedArray");
+        contract = await blockInfoContract.deploy();
+        console.log("deployTransaction:",contract.deployTransaction.hash);
+        console.log("adress:",contract.address);
+        await contract.deployed();
+
+    });
+
+    it("typeFixedArray:", async () => {
+
+        let sum = await  contract.sum();
+        console.log(sum);
+        expect(sum).to.equal(15)
+    })
+
+});
+
 

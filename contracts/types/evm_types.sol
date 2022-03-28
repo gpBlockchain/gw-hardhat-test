@@ -84,9 +84,19 @@ contract typeBool{
         return a;
     }
 
-    function andBool() public view  returns(bool)
+    function getBoolC() public  view  returns (bool)
+    {
+        return c;
+    }
+
+    function getOrBool() public view  returns(bool)
     {
       return  a || b;
+    }
+
+    function getAndBool() public view  returns(bool)
+    {
+        return  a  && b;
     }
 
 }
@@ -178,4 +188,42 @@ contract typeString{
     function getBytes() public view returns(bytes memory){
         return bytes(name);
     }
+}
+
+contract typeEmum{
+
+    enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
+    ActionChoices choice;
+    ActionChoices public  defaultChoice = ActionChoices.GoStraight;
+
+    function   setGoStraight() public {
+        choice = ActionChoices.GoStraight;
+    }
+
+    function getChoice() public  returns (uint) {
+        return uint(choice);
+    }
+
+    function getDefaultChoice() public returns (uint) {
+        return uint(defaultChoice);
+    }
+
+}
+
+
+contract typeFixedArray{
+
+    uint[5] fixedArr = [1,2,3,4,5];
+
+    function sum() public view returns (uint) {
+
+        uint total = 0;
+        for(uint i = 0; i < fixedArr.length; i++) {
+            total += fixedArr[i];
+        }
+        return total;
+
+    }
+
+
 }
