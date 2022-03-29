@@ -6,17 +6,15 @@ describe("typeU8 ", function () {
     let contract;
 
     before(async function () {
-
         const blockInfoContract = await ethers.getContractFactory("typeU8");
         contract = await blockInfoContract.deploy();
         console.log("deployTransaction:",contract.deployTransaction.hash);
-        console.log("address:",contract.address);
+        console.log("address:",await contract.address);
         await contract.deployed();
 
     });
 
-    it("typeU8 max ", async () => {
-
+    it("typeU8 max:", async () => {
         // check if chain id from web3 is same as chainId opcode
         contract.on("U8eventIndex",(u8,u8s,uint8s3) => {
             // Emitted on every block change
@@ -37,7 +35,6 @@ describe("typeU8 ", function () {
             console.log("---event---end--");
 
         })
-
         let tx = await contract.typeUint8(255,[255,255,255],[255,255,255]);
         console.log("typeUint8 hash :",tx.hash);
         let reusltGetUint8 =await contract.getUint8();
@@ -45,27 +42,41 @@ describe("typeU8 ", function () {
 
     })
 
-    it("typeU8 beyond 255 ", async () => {
+    it("typeU8 beyond 255:", async () => {
         try {
-
         let tx = await contract.typeUint8(256,[256,256,256],[256,256,256]);
         console.log("typeUint8 hash :",tx.hash);
         await tx.wait();
         let reusltGetUint8 = await contract.getUint8();
         expect(reusltGetUint8.toString()).to.throw(Error)
-
         } catch (error) {
-
+            expect(error.toString()).to.be.equal('Error: value out-of-bounds (argument="p1", value=256, code=INVALID_ARGUMENT, version=abi/5.5.0)')
         }
     })
 
-    it("typeU8 min ", async () => {
+    it("typeU8 minest 0: ", async () => {
         let tx = await contract.typeUint8(0,[0,0,0],[0,0,0]);
         console.log("typeUint8 hash :",tx.hash);
         await tx.wait();
         let reusltGetUint8 = await contract.getUint8();
         expect(reusltGetUint8.toString()).to.be.equal('0,0,0,0,0,0,0')
     })
+
+    it("typeU8 below 0: ", async () => {
+        let tx;
+        try
+        {
+            let tx = await contract.typeUint8(-1,[0,0,0],[0,0,0]);
+            await tx.wait();
+         }
+      catch (e) {
+          expect(e.toString()).to.be.equal('Error: value out-of-bounds (argument="p1", value=-1, code=INVALID_ARGUMENT, version=abi/5.5.0)')
+         }
+
+
+    })
+
+
 });
 
 describe("typeI8 ", function () {
@@ -76,8 +87,8 @@ describe("typeI8 ", function () {
 
             const blockInfoContract = await ethers.getContractFactory("typeI8");
             contract = await blockInfoContract.deploy();
-            console.log("deployTransaction:",contract.deployTransaction.hash);
-            console.log("address:",contract.address);
+            console.log("deployTransaction:", await contract.deployTransaction.hash);
+            console.log("address:",await contract.address);
             await contract.deployed();
 
         });
@@ -116,8 +127,8 @@ describe("typeBool", function (){
 
         const blockInfoContract = await ethers.getContractFactory("typeBool");
         contract = await blockInfoContract.deploy();
-        console.log("deployTransaction:",contract.deployTransaction.hash);
-        console.log("address:",contract.address);
+        console.log("deployTransaction:",await contract.deployTransaction.hash);
+        console.log("address:",await contract.address);
         await contract.deployed();
 
     });
@@ -200,49 +211,54 @@ describe("typeBytes", function (){
 
     let contract;
 
-
-
     before(async function () {
 
         const blockInfoContract = await ethers.getContractFactory("typeBytes");
         contract = await blockInfoContract.deploy();
-        console.log("deployTransaction:",contract.deployTransaction.hash);
-        console.log("adress:",contract.address);
+        console.log("deployTransaction:", contract.deployTransaction.hash);
+        console.log("adress:",await contract.address);
         await contract.deployed();
 
     });
 
-    it("typeBytes:", async () => {
+    it("typeBytes  1:", async () => {
 
         let bytes1Length = await contract.getbBytes1Length();
         console.log("The Bytes min length is :",bytes1Length);
         expect(bytes1Length).to.equal(1)
 
-    })
+    }).timeout(24500)
 
-    it("typeBytes:", async () => {
+    it("typeBytes 2:", async () => {
+
+        await contract.pushUnFixedAByte(1);
+        console.log("The Bytes min length is :",await contract.getbBytes2Length());
+
+    }).timeout(145000)
+
+    it("typeBytes 3:", async () => {
 
         let bytes2Length = await contract.getbBytes2Length();
         console.log("The Bytes max length is :",bytes2Length);
         expect(bytes2Length).to.equal(32)
 
-    })
+    }).timeout(145000)
 
-    it("typeBytes:", async () => {
+    it("typeBytes 4:", async () => {
 
         let bytes3Length = await contract.testBytesMaxLength("cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
         console.log("The Bytes max length is :",bytes3Length);
         expect(bytes3Length).to.equal(32)
 
-    })
+    }).timeout(14500)
 
-    it("typeBytes:", async () => {
+    it("typeBytes 5:", async () => {
 
         let unFixedBytesLength = await contract.unFixedBytesLength();
         console.log("The Bytes length is :",unFixedBytesLength);
-        expect(unFixedBytesLength).to.equal(2)
+        expect(unFixedBytesLength).to.equal(17956)
 
-    })
+    }).timeout(14500)
 
 });
 

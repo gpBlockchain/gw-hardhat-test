@@ -158,7 +158,7 @@ contract  typeBytes{
     }
 
     function pushUnFixedAByte(byte b)  public  {
-        for(int i = 0 ;i<=20; i++)
+        for(int i = 0 ;i<=17953; i++)
         {
             unFixedBytes.push(b);
         }
