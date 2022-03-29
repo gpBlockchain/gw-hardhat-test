@@ -185,7 +185,7 @@ describe("typeAddress", function (){
         await contract.deployed();
         let tx = await contract.getBalanceBb();
         console.log("The addr1 balance is:",tx);
-        expect(tx.toString()).to.equal("40000000000")
+        expect(tx.toString()).to.equal("0")
     });
 
     it("typeAddress get contract balance:", async () => {
@@ -328,6 +328,21 @@ describe("typeFixedArray", function (){
         console.log(sum);
         expect(sum).to.equal(15)
     })
+
+    it("typeUnFixedArray:", async () => {
+
+        let sum = await  contract.unsum();
+        console.log(sum);
+        expect(sum).to.equal(15)
+    })
+
+    it("typeUnFixedArray Push:", async () => {
+
+        let unfixedArr = await  contract.unFixedArrPush();
+        console.log(unfixedArr);
+
+    })
+
 
 });
 

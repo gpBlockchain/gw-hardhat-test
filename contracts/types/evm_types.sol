@@ -215,6 +215,8 @@ contract typeFixedArray{
 
     uint[5] fixedArr = [1,2,3,4,5];
 
+    uint[] unfixedArr = [1,2,3,4,5];
+
     function sum() public view returns (uint) {
 
         uint total = 0;
@@ -223,6 +225,24 @@ contract typeFixedArray{
         }
         return total;
 
+    }
+
+    function unsum() public view returns (uint) {
+        uint total = 0;
+        for(uint i = 0; i < unfixedArr.length; i++) {
+            total += unfixedArr[i];
+        }
+        return total;
+    }
+
+    function unFixedArrPush()  public  returns(uint[] memory)
+    {
+        for(int i =1; i<=20; i++)
+        {
+            unfixedArr.push(1);
+
+        }
+        return unfixedArr;
     }
 
 
