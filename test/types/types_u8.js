@@ -40,7 +40,7 @@ describe("typeU8 ", function () {
 
         let tx = await contract.typeUint8(255,[255,255,255],[255,255,255]);
         console.log("typeUint8 hash :",tx.hash);
-        let reusltGetUint8 = contract.getUint8();
+        let reusltGetUint8 =await contract.getUint8();
         expect(reusltGetUint8.toString()).to.be.equal('255,255,255,255,255,255,255')
 
     })
@@ -272,8 +272,8 @@ describe("typeString", function (){
     it("typeString:", async () => {
 
         await contract.changName();
-        console.log("The new string  is :", contract.getName());
-        expect(contract.getName()).to.equal("Zrptotest")
+        console.log("The new string  is :", await contract.getName());
+        expect(await contract.getName()).to.equal("Zrptotest")
 
     })
 
@@ -342,7 +342,6 @@ describe("typeFixedArray", function (){
         console.log(unfixedArr);
 
     })
-
 
 });
 
