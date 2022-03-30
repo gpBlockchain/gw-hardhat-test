@@ -204,19 +204,20 @@ contract typeString{
 contract typeEmum{
 
     enum ActionChoices { GoLeft, GoRight, GoStraight, SitStill }
+
     ActionChoices choice;
     ActionChoices public  defaultChoice = ActionChoices.GoStraight;
 
-    function   setGoStraight() public {
+    function setGoStraight() public {
         choice = ActionChoices.GoStraight;
     }
 
-    function getChoice() public  returns (uint) {
-        return uint(choice);
+    function getChoice() public  returns (ActionChoices) {
+        return choice;
     }
 
-    function getDefaultChoice() public returns (uint) {
-        return uint(defaultChoice);
+    function getDefaultChoice() public returns (ActionChoices) {
+        return defaultChoice;
     }
 
 }

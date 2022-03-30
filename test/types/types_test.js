@@ -328,14 +328,14 @@ describe("typeEmum", function (){
 
     it("typeEmum:", async () => {
 
-        contract.setGoStraight();
+        await contract.setGoStraight();
         let printSeason = await contract.getChoice();
         console.log(printSeason);
-        //expect(stringLength).to.equal(9)
+        //expect(printSeason).to.equal(contract.ActionChoices)
         let printSeason2 = await contract.getDefaultChoice();
         console.log(printSeason2);
 
-    })
+    }).timeout(200000)
 
 });
 
