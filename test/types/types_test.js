@@ -72,9 +72,25 @@ describe("typeU8 ", function () {
       catch (e) {
           expect(e.toString()).to.be.equal('Error: value out-of-bounds (argument="p1", value=-1, code=INVALID_ARGUMENT, version=abi/5.5.0)')
          }
-
-
     })
+
+    it("typeU256 max: ", async () => {
+         await contract.setUint256(65535);
+         let x =await contract.getUint256();
+         expect(x).to.be.equal(65535)
+    })
+
+    it("typeU256 beyond max: ", async () => {
+        try {
+            await contract.setUint256(965536111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111);
+            let x =await contract.getUint256();
+        }
+        catch(e)
+        {
+            expect(e.toString()).to.be.equal('Error: overflow (fault="overflow", operation="BigNumber.from", value=9.65536111111111e+149, code=NUMERIC_FAULT, version=bignumber/5.5.0)')
+        }
+
+    }).timeout(30000)
 
 
 });
