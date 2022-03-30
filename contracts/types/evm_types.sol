@@ -2,7 +2,6 @@
 pragma solidity ^0.7.3;
 import "hardhat/console.sol";
 
-
 contract typeU8{
 
     uint8 public u8;
@@ -222,11 +221,9 @@ contract typeEmum{
 
 }
 
-
 contract typeFixedArray{
 
     uint[5] fixedArr = [1,2,3,4,5];
-
     uint[] unfixedArr = [1,2,3,4,5];
 
     function sum() public view returns (uint) {
@@ -256,6 +253,4 @@ contract typeFixedArray{
         }
         return unfixedArr;
     }
-
-
 }
